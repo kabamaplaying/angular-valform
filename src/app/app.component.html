@@ -1,3 +1,4 @@
+<div class="container is-fluid">
 <div class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
 	<div class="column">
 		<form [formGroup]="productForm" (ngSubmit)="agregarProducto()">
@@ -63,7 +64,7 @@
 					<div class="control">
 						<label class="checkbox">
       <input type="checkbox" formControlName="termCondition">
-      I agree to the <a href="#">terms and conditions</a>
+      Agrega <a href="#">los terminos y condiciones</a>
     </label>
 					</div>
 					<div *ngIf="submited">
@@ -106,4 +107,5 @@
 		</table>
 	</div>
 
+</div>
 </div>
