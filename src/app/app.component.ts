@@ -108,12 +108,12 @@ export class AppComponent implements OnInit {
     {
       controlName: 'year',
       errorName: "min",
-      errorValue: "Maximo 5"
+      errorValue: "Ingresa un año mínimo 1990"
     },
     {
       controlName: 'price',
       errorName: "min",
-      errorValue: "Maximo 5"
+      errorValue: "Ingresa un número de mínimo un digito"
     }
   ]
 }
