@@ -1,0 +1,108 @@
+<div class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
+	<div class="column">
+		<form [formGroup]="productForm" (ngSubmit)="agregarProducto()">
+			<div class="field">
+				<label class="label">Nombre</label>
+				<div class="control">
+					<input class="input" type="text" placeholder="Text input" formControlName="name"
+            [ngClass]="{'is-danger': name.errors}"
+          >
+
+         <div *ngIf="name.invalid">
+           <p class="help is-danger">{{getNameError()}}</p>
+         </div>
+    </div>
+				</div>
+
+				<div class="field">
+					<label class="label">Descripción</label>
+					<div class="control has-icons-left has-icons-right">
+						<textarea class="textarea" placeholder="Textarea" formControlName="description"></textarea>
+						<span class="icon is-small is-left">
+          <i class="fas fa-user"></i>
+    </span>
+						<span class="icon is-small is-right">
+      <i class="fas fa-check"></i>
+    </span>
+					</div>
+					<p class="help is-success">This username is available</p>
+				</div>
+
+				<div class="field">
+					<label class="label">Año</label>
+					<div class="control has-icons-left has-icons-right">
+						<input class="input is-danger" type="email" placeholder="Email input" value="hello@" formControlName="year">
+						<span class="icon is-small is-left">
+      <i class="fas fa-envelope"></i>
+    </span>
+						<span class="icon is-small is-right">
+      <i class="fas fa-exclamation-triangle"></i>
+    </span>
+					</div>
+					<p class="help is-danger">This email is invalid</p>
+				</div>
+
+				<div class="field">
+					<label class="label">Precio</label>
+					<div class="control">
+						<input class="input is-danger" type="email" placeholder="Email input" value="hello@" formControlName="price">
+				</div>
+					</div>
+
+
+					<div class="field">
+						<div class="control">
+							<label class="checkbox">
+      <input type="checkbox">
+      I agree to the <a href="#">terms and conditions</a>
+    </label>
+						</div>
+					</div>
+
+					<div class="field">
+						<div class="control">
+							<label class="radio">
+      <input type="radio" name="question">
+      Yes
+    </label>
+							<label class="radio">
+      <input type="radio" name="question">
+      No
+    </label>
+						</div>
+					</div>
+
+					<div class="field is-grouped">
+						<div class="control">
+							<button class="button is-link" type="submit">Submit</button>
+						</div>
+						<div class="control">
+							<button class="button is-link is-light">Cancel</button>
+						</div>
+					</div>
+		</form>
+	</div>
+	<div class="column">
+		<table>
+			<caption>Mis productos</caption>
+			<thead>
+				<tr>
+					<th scope="col">Nombre</th>
+					<th scope="col">Descripción</th>
+					<th scope="col">Año</th>
+					<th scope="col">Precio</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let product of lista | async">
+					<td data-label="Account">{{product.name}}</td>
+					<td data-label="Due Date">{{product.description}}</td>
+					<td data-label="Amount">{{product.year}}</td>
+					<td data-label="Period">{{product.price | currency}}</td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+
+</div>
