@@ -6,7 +6,7 @@ import { Product } from './Producto';
 import { GenericFormValidator } from './validatorsForm/GenericValidator';
 import { AllValidationErrors, AllValidationErrorsMin } from './validatorsForm/allvalidationerrors';
 import { tap, map, filter } from 'rxjs/operators';
-import { ValidatorsCustom } from './validatorsForm/ValidatorsCustom';
+import { ValidatorsCustom } from './validatorsForm/validatorscustom';
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
@@ -115,7 +115,12 @@ export class AppComponent implements OnInit {
     },
     {
       controlName: 'year',
-      errorName: "min",
+      errorName: "required",
+      errorValue: "El campo año es obligatorio"
+    },
+    {
+      controlName: 'year',
+      errorName: "betweenYear",
       errorValue: "Ingresa un año mínimo 1990"
     },
     {
