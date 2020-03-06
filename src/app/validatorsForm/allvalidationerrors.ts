@@ -3,3 +3,9 @@ export interface AllValidationErrors {
   errorName: string;
   errorValue: any;
 }
+
+export interface AllValidationErrorsMin {
+  errorName: string,
+  errorValue: any,
+}
+

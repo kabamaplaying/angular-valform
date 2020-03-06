@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, FormArray, ValidationErrors } from '@angular/forms';
+import { Observable, of } from 'rxjs';
 import { ProductServiceService } from './product-service.service';
-import { Observable } from 'rxjs';
 import { Product } from './Producto';
-import { ValidationErrors } from './validatorsForm/allvalidationerrors';
+import { GenericFormValidator } from './validatorsForm/GenericValidator';
+import { AllValidationErrors, AllValidationErrorsMin } from './validatorsForm/allvalidationerrors';
+import { tap, map, filter } from 'rxjs/operators';
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
@@ -13,14 +15,19 @@ export class AppComponent implements OnInit {
   lista: Observable<Product[]>;
   productForm: FormGroup;
   private errors: AllValidationErrors[];
-  constructor(private service: ProductServiceService, private fb: FormBuilder) {
+
+  constructor(
+    private service: ProductServiceService,
+    private fb: FormBuilder,
+    private validatorFormError: GenericFormValidator) {
     this.lista = this.service.listaProductos();
   }
 
   ngOnInit() {
     this.crearForma();
-
-    this.productForm.valueChanges.subscribe(control => console.log(control));
+    this.productForm.valueChanges.subscribe(e => {
+      this.errors = this.validatorFormError.calculateErrors(this.productForm);
+    });
   }
 
   private crearForma() {
@@ -52,41 +59,31 @@ export class AppComponent implements OnInit {
   get price() {
     return this.productForm.get('price');
   }
-  getNameError() {
-    const error =
-      this.name.hasError('required') ? 'Este campo es requerido' :
-        this.name.hasError('minLength') ? 'El nombre de tener minimo 5 caracteres' :
-          this.name.hasError('maxLength') ? 'El nombre debe tener maximo 120 caracteres' : '';
-    console.log(error)
-    return this.name.hasError('required') ? 'Este campo es requerido' :
-      this.name.hasError('minLength') ? 'El nombre de tener minimo 5 caracteres' : this.name.hasError('maxLength') ? 'El nombre debe tener maximo 120 caracteres' : '';
+
+  getErrorControl(controlName) {
+    const jsonErrors: any = this.productForm.get(controlName).errors;
+    if (jsonErrors !== null && this.errors != undefined) {
+      const tipoErrorActual = Object.keys(jsonErrors).map(key => key === null ? '' : key).join('');
+      return this.mensajeError.map((error, index, self) => {
+        if (error.errorName === tipoErrorActual) {
+          return error.errorValue;
+        }
+      }).join('');
+    }
+    return '';
   }
-
-  calculateErrors(form: FormGroup | FormArray) {
-    Object.keys(form.controls).forEach(field => {
-      const control = form.get(field);
-      if (control instanceof FormGroup || control instanceof FormArray) {
-        this.errors = this.errors.concat(this.calculateErrors(control));
-        return;
-      }
-
-      const controlErrors: ValidationErrors = control.errors;
-      if (controlErrors !== null) {
-        Object.keys(controlErrors).forEach(keyError => {
-          this.errors.push({
-            controlName: field,
-            errorName: keyError,
-            errorValue: controlErrors[keyError]
-          });
-        });
-      }
-    });
-
-    // This removes duplicates
-    this.errors = this.errors.filter((error, index, self) => self.findIndex(t => {
-      return t.controlName === error.controlName && t.errorName === error.errorName;
-    }) === index);
-    return this.errors;
-  }
-
+  private mensajeError: AllValidationErrorsMin[] = [
+    {
+      errorName: "required",
+      errorValue: "el campo es obligatorio"
+    },
+    {
+      errorName: "minlength",
+      errorValue: "Minimo 5"
+    },
+    {
+      errorName: "maxlength",
+      errorValue: "Maximo 5"
+    }
+  ]
 }

@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
 import { ProductServiceService } from './product-service.service';
 
+
 @NgModule({
   imports:      [ BrowserModule, FormsModule, ReactiveFormsModule ],
-  declarations: [ AppComponent, HelloComponent ],
+  declarations: [ AppComponent],
   bootstrap:    [ AppComponent ],
   providers: [ProductServiceService]
 })

@@ -1,8 +1,12 @@
-import { FormBuilder, FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
-import { ValidationErrors } from './validatorsForm/allvalidationerrors';
+import { Injectable } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators, FormArray, ValidationErrors } from '@angular/forms';
+import { AllValidationErrors } from './allvalidationerrors';
+@Injectable({ providedIn: 'root' })
 export class GenericFormValidator {
-  private errors: AllValidationErrors[];
-    calculateErrors(form: FormGroup | FormArray) {
+
+  private errors: AllValidationErrors[] = [];
+
+  calculateErrors(form: FormGroup | FormArray) {
     Object.keys(form.controls).forEach(field => {
       const control = form.get(field);
       if (control instanceof FormGroup || control instanceof FormArray) {
