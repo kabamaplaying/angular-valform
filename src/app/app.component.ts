@@ -12,7 +12,7 @@ import { ValidatorsCustom } from './validatorsForm/ValidatorsCustom';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit { 
   lista: Observable<Product[]>;
   productForm: FormGroup;
   private errors: AllValidationErrors[];
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(120)]],
       description: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(120)]],
-      year: [0, [Validators.required, Validators.min(1990), ValidatorsCustom.betweenYear(1900, new Date().getFullYear())]],
+      year: [0, [Validators.required,  ValidatorsCustom.betweenYear(1900, new Date().getFullYear())]],
       price: [0, [Validators.required, Validators.min(1)]]
     });
   }
