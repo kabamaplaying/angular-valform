@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
 import { ProductServiceService } from './product-service.service';
 import { Observable } from 'rxjs';
 import { Product } from './Producto';
-import { AllValidationErrors } from './validatorsForm/allvalidationerrors';
+import { ValidationErrors } from './validatorsForm/allvalidationerrors';
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
