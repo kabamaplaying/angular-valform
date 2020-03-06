@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import {  map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Product } from './Producto';
 @Injectable({ providedIn: "root" })
 export class ProductServiceService {
 
   productList: BehaviorSubject<Product[]>;
   listaP: Product[] = [];
- 
+
   constructor() { }
 
 
-  listaProductos() :Observable<Product[]>{
+  listaProductos(): Observable<Product[]> {
 
     this.listaP = [
       {
@@ -34,10 +34,13 @@ export class ProductServiceService {
       }
     ];
     this.productList = new BehaviorSubject(this.listaP);
-    return  this.productList.asObservable().pipe(
+    return this.productList.asObservable().pipe(
       map(e => e as Product[]
       )
-      );
+    );
   }
-
+  agregarProducto(producto: Product) {
+    console.log(producto)
+    this.productList.next([...this.productList.value, producto]);
+  }
 }

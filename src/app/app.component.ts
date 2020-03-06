@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   lista: Observable<Product[]>;
   productForm: FormGroup;
   private errors: AllValidationErrors[];
-  enviado: boolean = false;
+  submited: boolean = false;
   constructor(
     private service: ProductServiceService,
     private fb: FormBuilder,
@@ -42,12 +42,12 @@ export class AppComponent implements OnInit {
     return this.productForm.invalid;
   }
   agregarProducto() {
-    this.enviado = true;
+    this.submited = true;
     if (this.productForm.invalid) {
       return;
     }
 
-    this.enviado = false;
+    this.submited = false;
     console.log(this.name.dirty, this.name.errors);
     console.log('aca vamos...', this.productForm.valid)
   }
