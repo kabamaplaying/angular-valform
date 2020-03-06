@@ -6,6 +6,7 @@ import { Product } from './Producto';
 import { GenericFormValidator } from './validatorsForm/GenericValidator';
 import { AllValidationErrors, AllValidationErrorsMin } from './validatorsForm/allvalidationerrors';
 import { tap, map, filter } from 'rxjs/operators';
+import { ValidatorsCustom } from './validatorsForm/ValidatorsCustom';
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
@@ -34,7 +35,7 @@ export class AppComponent implements OnInit {
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(120)]],
       description: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(120)]],
-      year: [0, [Validators.required, Validators.min(1990)]],
+      year: [0, [Validators.required, Validators.min(1990), ValidatorsCustom.betweenYear(1900, new Date().getFullYear())]],
       price: [0, [Validators.required, Validators.min(1)]]
     });
   }
