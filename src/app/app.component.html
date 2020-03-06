@@ -62,24 +62,16 @@
 				<div class="field">
 					<div class="control">
 						<label class="checkbox">
-      <input type="checkbox">
+      <input type="checkbox" formControlName="termCondition">
       I agree to the <a href="#">terms and conditions</a>
     </label>
 					</div>
-				</div>
-
-				<div class="field">
-					<div class="control">
-						<label class="radio">
-      <input type="radio" name="question">
-      Yes
-    </label>
-						<label class="radio">
-      <input type="radio" name="question">
-      No
-    </label>
+					<div *ngIf="submited">
+						<p class="help is-danger">{{getErrorControl('termCondition')}}</p>
 					</div>
 				</div>
+
+
 
 				<div class="field is-grouped">
 					<div class="control">
