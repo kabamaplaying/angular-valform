@@ -41,7 +41,7 @@
       <i class="fas fa-exclamation-triangle"></i>
     </span>
 				</div>
-				<div *ngIf="description.year">
+				<div *ngIf="description.invalid">
 					<p class="help is-danger">{{getErrorControl('year')}}</p>
 				</div>
 			</div>
@@ -49,9 +49,9 @@
 			<div class="field">
 				<label class="label">Precio</label>
 				<div class="control">
-					<input class="input is-danger" type="email" placeholder="Email input" value="hello@" formControlName="price">
+					<input class="input" [ngClass]="{'is-danger': price.errors}" type="number" placeholder="Precio del producto"  formControlName="price">
 				</div>
-					<div *ngIf="description.price">
+					<div *ngIf="price.invalid">
 						<p class="help is-danger">{{getErrorControl('price')}}</p>
 					</div>
 				</div>

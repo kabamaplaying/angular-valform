@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   lista: Observable<Product[]>;
   productForm: FormGroup;
   private errors: AllValidationErrors[];
-
+  enviado:  boolean = false;
   constructor(
     private service: ProductServiceService,
     private fb: FormBuilder,
@@ -62,27 +62,57 @@ export class AppComponent implements OnInit {
 
   getErrorControl(controlName) {
     const jsonErrors: any = this.productForm.get(controlName).errors;
-    if (jsonErrors !== null && this.errors != undefined) {
+    console.log(jsonErrors, 'controlErrors')
+    if (jsonErrors !== null) {
       const tipoErrorActual = Object.keys(jsonErrors).map(key => key === null ? '' : key).join('');
+      console.log(tipoErrorActual, ' ==== ', jsonErrors)
       return this.mensajeError.map((error, index, self) => {
-        if (error.errorName === tipoErrorActual) {
+        if (error.controlName === controlName && error.errorName === tipoErrorActual) {
           return error.errorValue;
         }
       }).join('');
     }
     return '';
   }
-  private mensajeError: AllValidationErrorsMin[] = [
+  private mensajeError: AllValidationErrors[] = [
     {
+      controlName: 'name',
       errorName: "required",
       errorValue: "el campo es obligatorio"
     },
     {
+      controlName: 'name',
       errorName: "minlength",
       errorValue: "Minimo 5"
     },
     {
+      controlName: 'name',
       errorName: "maxlength",
+      errorValue: "Maximo 5"
+    },
+        {
+      controlName: 'description',
+      errorName: "required",
+      errorValue: "el campo es obligatorio"
+    },
+    {
+      controlName: 'description',
+      errorName: "minlength",
+      errorValue: "Minimo 5"
+    },
+    {
+      controlName: 'description',
+      errorName: "maxlength",
+      errorValue: "Maximo 5"
+    },
+    {
+      controlName: 'year',
+      errorName: "min",
+      errorValue: "Maximo 5"
+    },
+    {
+      controlName: 'price',
+      errorName: "min",
       errorValue: "Maximo 5"
     }
   ]
