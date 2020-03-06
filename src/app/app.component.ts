@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   lista: Observable<Product[]>;
   productForm: FormGroup;
   private errors: AllValidationErrors[];
-  enviado:  boolean = false;
+  enviado: boolean = false;
   constructor(
     private service: ProductServiceService,
     private fb: FormBuilder,
@@ -33,13 +33,21 @@ export class AppComponent implements OnInit {
   private crearForma() {
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(120)]],
-      description: ['', [Validators.required, Validators.minLength(6)]],
+      description: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(120)]],
       year: [0, [Validators.required, Validators.min(1990)]],
       price: [0, [Validators.required, Validators.min(1)]]
     });
   }
-
+  get validForm() {
+    return this.productForm.invalid;
+  }
   agregarProducto() {
+    this.enviado = true;
+    if (this.productForm.invalid) {
+      return;
+    }
+
+    this.enviado = false;
     console.log(this.name.dirty, this.name.errors);
     console.log('aca vamos...', this.productForm.valid)
   }
@@ -65,7 +73,6 @@ export class AppComponent implements OnInit {
     console.log(jsonErrors, 'controlErrors')
     if (jsonErrors !== null) {
       const tipoErrorActual = Object.keys(jsonErrors).map(key => key === null ? '' : key).join('');
-      console.log(tipoErrorActual, ' ==== ', jsonErrors)
       return this.mensajeError.map((error, index, self) => {
         if (error.controlName === controlName && error.errorName === tipoErrorActual) {
           return error.errorValue;
@@ -78,19 +85,19 @@ export class AppComponent implements OnInit {
     {
       controlName: 'name',
       errorName: "required",
-      errorValue: "el campo es obligatorio"
+      errorValue: "El campo es obligatorio"
     },
     {
       controlName: 'name',
       errorName: "minlength",
-      errorValue: "Minimo 5"
+      errorValue: "Ingresa un nombre con mínimo 5 caracteres"
     },
     {
       controlName: 'name',
       errorName: "maxlength",
-      errorValue: "Maximo 5"
+      errorValue: "Ingresa un nombre con maximo 120 caracteres"
     },
-        {
+    {
       controlName: 'description',
       errorName: "required",
       errorValue: "el campo es obligatorio"
@@ -98,12 +105,12 @@ export class AppComponent implements OnInit {
     {
       controlName: 'description',
       errorName: "minlength",
-      errorValue: "Minimo 5"
+      errorValue: "Ingresa una descrición con mínimo 5 caracteres"
     },
     {
       controlName: 'description',
       errorName: "maxlength",
-      errorValue: "Maximo 5"
+      errorValue: "Ingresa una descripción con maximo 120 caracteres"
     },
     {
       controlName: 'year',
