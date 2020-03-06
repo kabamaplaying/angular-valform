@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { ProductServiceService } from './product-service.service';
 import { Observable } from 'rxjs';
 import { Product } from './Producto';
+import { AllValidationErrors } from './validatorsForm/allvalidationerrors';
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
@@ -17,9 +18,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-   this.crearForma();
+    this.crearForma();
 
-   this.productForm.valueChanges.subscribe(control => console.log(control));
+    this.productForm.valueChanges.subscribe(control => console.log(control));
   }
 
   private crearForma() {
@@ -52,16 +53,16 @@ export class AppComponent implements OnInit {
     return this.productForm.get('price');
   }
   getNameError() {
-     const error = 
-           this.name.hasError('required') ? 'Este campo es requerido' : 
-           this.name.hasError('minLength') ? 'El nombre de tener minimo 5 caracteres': 
-           this.name.hasError('maxLength') ? 'El nombre debe tener maximo 120 caracteres' : '';
+    const error =
+      this.name.hasError('required') ? 'Este campo es requerido' :
+        this.name.hasError('minLength') ? 'El nombre de tener minimo 5 caracteres' :
+          this.name.hasError('maxLength') ? 'El nombre debe tener maximo 120 caracteres' : '';
     console.log(error)
-    return this.name.hasError('required') ? 'Este campo es requerido' : 
-           this.name.hasError('minLength') ? 'El nombre de tener minimo 5 caracteres': this.name.hasError('maxLength') ? 'El nombre debe tener maximo 120 caracteres' : '';
+    return this.name.hasError('required') ? 'Este campo es requerido' :
+      this.name.hasError('minLength') ? 'El nombre de tener minimo 5 caracteres' : this.name.hasError('maxLength') ? 'El nombre debe tener maximo 120 caracteres' : '';
   }
 
-    calculateErrors(form: FormGroup | FormArray) {
+  calculateErrors(form: FormGroup | FormArray) {
     Object.keys(form.controls).forEach(field => {
       const control = form.get(field);
       if (control instanceof FormGroup || control instanceof FormArray) {
