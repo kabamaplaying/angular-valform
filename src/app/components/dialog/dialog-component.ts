@@ -5,7 +5,7 @@ import {
   Inject,
   OnInit
 } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, } from '@angular/material/dialog';
 
 // import { Action, Store } from "@ngrx/store";
 // import { State } from "../../app.reducers";
@@ -14,17 +14,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'dialog-component',
   templateUrl: './dialog-component.html',
-  styleUrls: ['./dialog-component.scss']
+  styleUrls: ['./dialog-component.css']
 })
 
 export class DialogComponent implements OnInit {
   ngOnInit() { }
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: {
-      text: string,
-      title: string,
-      cancel: boolean
-    },
+  @Inject(MAT_DIALOG_DATA) public data: {data},
     public dialogRef: MatDialogRef<DialogComponent>
 
   ) { }
