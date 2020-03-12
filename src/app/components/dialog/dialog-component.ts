@@ -20,25 +20,25 @@ import { MatDialogRef, MAT_DIALOG_DATA, } from '@angular/material/dialog';
 export class DialogComponent implements OnInit {
   ngOnInit() { }
   constructor(
-  @Inject(MAT_DIALOG_DATA) public data: {data},
+    @Inject(MAT_DIALOG_DATA) public data: { data },
     public dialogRef: MatDialogRef<DialogComponent>
 
   ) { }
 
-  public cancel() {
+  public cancelarAccion() {
     // if (this.data.cancel !== undefined) {
     //   // this.store.dispatch(this.data.cancel);
     // }
-    this.close();
+    this.dialogRef.close(false);
+  }
+  public confirmarAccion() {
+    //this.store.dispatch(this.data.delete);
+    this.dialogRef.close(true);
   }
 
+ 
   public close() {
     this.dialogRef.close();
-  }
-
-  public delete() {
-    //this.store.dispatch(this.data.delete);
-    this.close();
   }
 
   @HostListener("keydown.esc")

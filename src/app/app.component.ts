@@ -8,6 +8,7 @@ import { AllValidationErrors, AllValidationErrorsMin } from './validatorsForm/al
 import { tap, map, filter } from 'rxjs/operators';
 import { ValidatorsCustom } from './validatorsForm/validatorscustom';
 import { DialogService } from './services/dialog-service';
+import { DialogData } from '../models/dialog-data';
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
@@ -22,7 +23,7 @@ export class AppComponent implements OnInit {
     private service: ProductServiceService,
     private fb: FormBuilder,
     private validatorFormError: GenericFormValidator,
-    private dialogo: DialogService) {
+    private dialogoService: DialogService) {
     this.lista = this.service.listaProductos();
   }
 
@@ -56,6 +57,8 @@ export class AppComponent implements OnInit {
   }
 
   eliminarProducto(id: number) {
+
+    this.abrirDialogo(id);
     this.service.eliminarProducto(id);
   }
 
@@ -149,7 +152,10 @@ export class AppComponent implements OnInit {
     this.productForm.reset();
   }
 
-  abrirDialogo() {
-    this.dialogo.abrirDialog();
+  abrirDialogo(data: number) {
+    const dataDialog = { data, mensaje: '¿Estás seguro de eliminar el producto seleccionado?', titulo: 'Eliminar producto' };
+    this.dialogoService.abrirDialog(dataDialog);
+    this.dialogoService.respuestaUsuario$.subscribe(confirmacionDialogo => console.log(confirmacionDialogo))
+
   }
 }
