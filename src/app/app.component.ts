@@ -57,8 +57,6 @@ export class AppComponent implements OnInit {
   }
 
   eliminarProducto(id: number) {
-
-    this.abrirDialogo(id);
     this.service.eliminarProducto(id);
   }
 
@@ -155,7 +153,14 @@ export class AppComponent implements OnInit {
   abrirDialogo(data: number) {
     const dataDialog = { data, mensaje: '¿Estás seguro de eliminar el producto seleccionado?', titulo: 'Eliminar producto' };
     this.dialogoService.abrirDialog(dataDialog);
-    this.dialogoService.respuestaUsuario$.subscribe(confirmacionDialogo => console.log(confirmacionDialogo))
+    this.dialogoService.respuestaUsuario$.subscribe(confirmacionDialogo => { 
+      if (confirmacionDialogo) {
+        console.log(confirmacionDialogo, 'Voy a eliminar')
+        this.eliminarProducto(data);
+        this.dialogoService.limpiarRespuestaUsuario();
+      }
+    }
+    )
 
   }
 }

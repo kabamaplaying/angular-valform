@@ -1,7 +1,6 @@
 <div class="container is-fluid">
 	<div class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
 		<div class="column">
-      <button type="button" (click)="abrirDialogo()"></button>
 			<div class="box">
 				<form [formGroup]="productForm" (ngSubmit)="agregarProducto()">
 					<div class="field">
@@ -104,7 +103,7 @@
 						<td data-label="Due Date">{{product.description}}</td>
 						<td data-label="Amount">{{product.year}}</td>
 						<td data-label="Period">{{product.price | currency}}</td>
-						<td><a class="button is-danger is-outlined" (click)="eliminarProducto(product.id)">
+						<td><a class="button is-danger is-outlined" (click)="abrirDialogo(product.id)">
 								<span>eliminar</span>
 								<span class="icon is-small"><i class="fas fa-times"></i>
                 </span>

@@ -2,7 +2,9 @@
 <mat-dialog-content>{{data.mensaje}}
 </mat-dialog-content>
 <mat-dialog-actions>
-	<button mat-button mat-dialog-close (click)="cancelarAccion()">Cancel</button>
-	<!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-	<button mat-button [mat-dialog-close]="true" (click)="confirmarAccion()">Delete</button>
-</mat-dialog-actions>
+	<div class="buttons">
+		<a class="button" (click)="cancelarAccion()">Cancelar</a>
+		<!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+		<a type="button" class="button is-danger"  (click)="confirmarAccion()">Eliminar</a>
+	</div>
+</mat-dialog-actions>  
