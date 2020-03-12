@@ -19,10 +19,10 @@ export class DialogService {
     const dialogRef = this.dialog.open(DialogComponent, { data });
 
     dialogRef.afterClosed().subscribe(dialogResult => {
-      console.log(dialogResult)
-      this.respuestaUsuario.next(dialogResult);
+      const resultado =  dialogResult as DialogData<any>;
+      this.respuestaUsuario.next(resultado);
     });
-    dialogRef.close({});
+
   }
   limpiarRespuestaUsuario() {
     this.respuestaUsuario.next(null);

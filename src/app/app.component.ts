@@ -150,13 +150,12 @@ export class AppComponent implements OnInit {
     this.productForm.reset();
   }
 
-  abrirDialogo(data: number) {
+  abrirDialogo(data: Product) {
     const dataDialog = { data, mensaje: '¿Estás seguro de eliminar el producto seleccionado?', titulo: 'Eliminar producto' };
     this.dialogoService.abrirDialog(dataDialog);
-    this.dialogoService.respuestaUsuario$.subscribe(confirmacionDialogo => { 
-      if (confirmacionDialogo) {
-        console.log(confirmacionDialogo, 'Voy a eliminar')
-        this.eliminarProducto(data);
+    this.dialogoService.respuestaUsuario$.subscribe(confirmacionDialogo => {
+      if (confirmacionDialogo && confirmacionDialogo.confirmacion) {
+        this.eliminarProducto(confirmacionDialogo.data);
         this.dialogoService.limpiarRespuestaUsuario();
       }
     }

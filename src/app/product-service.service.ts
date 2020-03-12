@@ -43,16 +43,23 @@ export class ProductServiceService {
     );
   }
   agregarProducto(producto: Product) {
+    let mayor = 1;
+    const pId = this.productList.value.forEach((e: Product, index: number) => {
+        if(e.id > mayor) {
+          mayor = e.id
+        }
+       
+      });
+    console.log(mayor)
+    producto.id = mayor + 1;
     this.productList.next([...this.productList.value, producto]);
   }
 
   eliminarProducto(idProducto: number) {
-    console.log(idProducto)
     this.productList.value
       .forEach((product: Product, index: number) => {
         if (product.id === idProducto) {
           this.productList.value.splice(index, 1);
-
         }
       });
 

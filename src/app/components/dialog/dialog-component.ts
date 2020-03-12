@@ -5,7 +5,8 @@ import {
   Inject,
   OnInit
 } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig  } from '@angular/material/dialog';
+import { DialogData } from '../../models/dialog-data';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 
 // import { Action, Store } from "@ngrx/store";
 // import { State } from "../../app.reducers";
@@ -29,14 +30,16 @@ export class DialogComponent implements OnInit {
     // if (this.data.cancel !== undefined) {
     //   // this.store.dispatch(this.data.cancel);
     // }
-    this.dialogRef.close(false);
+    const confirmacion = { ...this.data, confirmacion: false };
+    this.dialogRef.close(confirmacion);
   }
   public confirmarAccion() {
     //this.store.dispatch(this.data.delete);
-    this.dialogRef.close(true);
+    const confirmacion = { ...this.data, confirmacion: true };
+    this.dialogRef.close(confirmacion);
   }
 
- 
+
   public close() {
     this.dialogRef.close();
   }
