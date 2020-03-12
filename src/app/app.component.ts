@@ -7,6 +7,7 @@ import { GenericFormValidator } from './validatorsForm/GenericValidator';
 import { AllValidationErrors, AllValidationErrorsMin } from './validatorsForm/allvalidationerrors';
 import { tap, map, filter } from 'rxjs/operators';
 import { ValidatorsCustom } from './validatorsForm/validatorscustom';
+import { DialogService } from './services/dialog-service';
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
@@ -20,7 +21,8 @@ export class AppComponent implements OnInit {
   constructor(
     private service: ProductServiceService,
     private fb: FormBuilder,
-    private validatorFormError: GenericFormValidator) {
+    private validatorFormError: GenericFormValidator,
+    private dialogo: DialogService) {
     this.lista = this.service.listaProductos();
   }
 
@@ -51,6 +53,10 @@ export class AppComponent implements OnInit {
 
     this.service.agregarProducto(this.productForm.value as Product);
     this.limpiarFormulario();
+  }
+
+  eliminarProducto(id: number) {
+    this.service.eliminarProducto(id);
   }
 
   get name() {
@@ -141,5 +147,9 @@ export class AppComponent implements OnInit {
   limpiarFormulario() {
     this.submited = false;
     this.productForm.reset();
+  }
+
+  abrirDialogo() {
+    this.dialogo.abrirDialog();
   }
 }

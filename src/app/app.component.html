@@ -1,92 +1,93 @@
 <div class="container is-fluid">
 	<div class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
 		<div class="column">
-      <div class="box">
-			<form [formGroup]="productForm" (ngSubmit)="agregarProducto()">
-				<div class="field">
-					<label class="label">Nombre</label>
-					<div class="control">
-						<input class="input" type="text" placeholder="Ingresa el nombre del producto" formControlName="name"
+      <button type="button" (click)="abrirDialogo()"></button>
+			<div class="box">
+				<form [formGroup]="productForm" (ngSubmit)="agregarProducto()">
+					<div class="field">
+						<label class="label">Nombre</label>
+						<div class="control">
+							<input class="input" type="text" placeholder="Ingresa el nombre del producto" formControlName="name"
             [ngClass]="{'is-danger': (name.errors && submited), 'is-primary': !name.errors}"
           >
 
-						<div *ngIf="name.invalid && submited">
-							<p class="help is-danger">{{getErrorControl('name')}}</p>
+							<div *ngIf="name.invalid && submited">
+								<p class="help is-danger">{{getErrorControl('name')}}</p>
+							</div>
 						</div>
 					</div>
-				</div>
-
-				<div class="field">
-					<label class="label">Descripción</label>
-					<div class="control has-icons-left has-icons-right">
-						<textarea class="textarea" placeholder="Ingresa una descripcion del producto" formControlName="description"
-          [ngClass]="{'is-danger': (description.errors && submited), 'is-primary': !description.errors}"
-          ></textarea>
-						<span class="icon is-small is-left">
-          <i class="fas fa-user"></i>
-    </span>
-						<span class="icon is-small is-right">
-      <i class="fas fa-check"></i>
-    </span>
-					</div>
-					<div *ngIf="description.invalid && submited">
-						<p class="help is-danger">{{getErrorControl('description')}}</p>
-					</div>
-				</div>
-
-				<div class="field">
-					<label class="label">Año</label>
-					<div class="control has-icons-left has-icons-right">
-						<input class="input" [ngClass]="{'is-danger': (year.errors && submited), 'is-primary': !year.errors}" type="number" placeholder="Ingresa el año de creacion" value="Ingresa el año de creacion del producto" formControlName="year">
-						<span class="icon is-small is-left">
-      <i class="fas fa-envelope"></i>
-    </span>
-						<span class="icon is-small is-right">
-      <i class="fas fa-exclamation-triangle"></i>
-    </span>
-					</div>
-					<div *ngIf="description.invalid && submited">
-						<p class="help is-danger">{{getErrorControl('year')}}</p>
-					</div>
-				</div>
-
-				<div class="field">
-					<label class="label">Precio</label>
-					<div class="control">
-						<input class="input" [ngClass]="{'is-danger': submited && price.errors, 'is-primary' : !price.errors}" type="number" placeholder="Precio del producto"  formControlName="price">
-				</div>
-						<div *ngIf="price.invalid && submited">
-							<p class="help is-danger">{{getErrorControl('price')}}</p>
-						</div>
-					</div>
-
 
 					<div class="field">
+						<label class="label">Descripción</label>
+						<div class="control has-icons-left has-icons-right">
+							<textarea class="textarea" placeholder="Ingresa una descripcion del producto" formControlName="description"
+          [ngClass]="{'is-danger': (description.errors && submited), 'is-primary': !description.errors}"
+          ></textarea>
+							<span class="icon is-small is-left">
+          <i class="fas fa-user"></i>
+    </span>
+							<span class="icon is-small is-right">
+      <i class="fas fa-check"></i>
+    </span>
+						</div>
+						<div *ngIf="description.invalid && submited">
+							<p class="help is-danger">{{getErrorControl('description')}}</p>
+						</div>
+					</div>
+
+					<div class="field">
+						<label class="label">Año</label>
+						<div class="control has-icons-left has-icons-right">
+							<input class="input" [ngClass]="{'is-danger': (year.errors && submited), 'is-primary': !year.errors}" type="number" placeholder="Ingresa el año de creacion" value="Ingresa el año de creacion del producto" formControlName="year">
+							<span class="icon is-small is-left">
+      <i class="fas fa-envelope"></i>
+    </span>
+							<span class="icon is-small is-right">
+      <i class="fas fa-exclamation-triangle"></i>
+    </span>
+						</div>
+						<div *ngIf="description.invalid && submited">
+							<p class="help is-danger">{{getErrorControl('year')}}</p>
+						</div>
+					</div>
+
+					<div class="field">
+						<label class="label">Precio</label>
 						<div class="control">
-							<label class="checkbox">
+							<input class="input" [ngClass]="{'is-danger': submited && price.errors, 'is-primary' : !price.errors}" type="number" placeholder="Precio del producto"  formControlName="price">
+				</div>
+							<div *ngIf="price.invalid && submited">
+								<p class="help is-danger">{{getErrorControl('price')}}</p>
+							</div>
+						</div>
+
+
+						<div class="field">
+							<div class="control">
+								<label class="checkbox">
       <input type="checkbox" formControlName="termCondition">
       Agrega <a href="#">los terminos y condiciones</a>
     </label>
+							</div>
+							<div *ngIf="submited">
+								<p class="help is-danger">{{getErrorControl('termCondition')}}</p>
+							</div>
 						</div>
-						<div *ngIf="submited">
-							<p class="help is-danger">{{getErrorControl('termCondition')}}</p>
-						</div>
-					</div>
 
 
 
-					<div class="field is-grouped">
-						<div class="control">
-							<button class="button is-primary" type="submit" [disabled]="submited">Guardar</button>
+						<div class="field is-grouped">
+							<div class="control">
+								<button class="button is-primary" type="submit" [disabled]="submited">Guardar</button>
+							</div>
+							<div class="control">
+								<button type="button" class="button" (click)="limpiarFormulario()">Cancel</button>
+							</div>
 						</div>
-						<div class="control">
-							<button type="button" class="button" (click)="limpiarFormulario()">Cancel</button>
-						</div>
-					</div>
-			</form>
-      </div>
+				</form>
+			</div>
 		</div>
-		<div class="column">
+		<div class="column"> 
 			<table class="table is-fullwidt is-striped">
 				<caption>Mis productos</caption>
 				<thead class="thead">
@@ -99,10 +100,16 @@
 				</thead>
 				<tbody class="tbody">
 					<tr *ngFor="let product of lista | async">
-						<td data-label="Account">{{product.name}}</td>
+						<td data-label="Account">{{product.name}}  -  {{product.id}}</td>
 						<td data-label="Due Date">{{product.description}}</td>
 						<td data-label="Amount">{{product.year}}</td>
 						<td data-label="Period">{{product.price | currency}}</td>
+						<td><a class="button is-danger is-outlined" (click)="eliminarProducto(product.id)">
+								<span>eliminar</span>
+								<span class="icon is-small"><i class="fas fa-times"></i>
+                </span>
+							</a>
+              </td>
 					</tr>
 
 				</tbody>
