@@ -107,18 +107,17 @@
 						<td data-label="Period">{{product.price | currency}}</td>
 						<td>
 							<p class="buttons">
-								<a class="button is-danger is-outlined" (click)="abrirDialogo(product.id)">
-                  <span>eliminar</span>
-									<span class="icon is-small">
+								<a class="button is-small" (click)="abrirDialogo(product.id)">
+									<span class="icon is-small is-outline">
                    <i class="material-icons">
 edit
 </i>
                 </span>
 								</a>
 
-								<a class="button is-small" (click)="abrirDialogo(product.id)">
+								<a class="button is-small " (click)="abrirDialogo(product.id)">
 									<span class="icon  is-small">
-                    <i class="fas fa-check"></i>
+                    <i class="material-icons">delete</i>
 									</span>
 								</a>
 							</p>
