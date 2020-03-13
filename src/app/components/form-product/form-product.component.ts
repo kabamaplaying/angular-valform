@@ -13,7 +13,7 @@ import { ValidatorsCustom } from '../../validatorsForm/validatorscustom';
   styleUrls: ['./form-product.component.css']
 })
 export class FormProductComponent implements OnInit {
-  @Input() productCreate: Product;
+  @Input() productoFormulario: Product;
   @Input() productEvent = new EventEmitter();
   productForm: FormGroup;
   private errors: AllValidationErrors[];
@@ -28,7 +28,19 @@ export class FormProductComponent implements OnInit {
     });
   }
 
+  agregarProducto() {
+    this.submited = true;
+    if (this.productForm.invalid) {
+      return;
+    }
+    this.productForm = { ...this.productForm.value };
+    this.productEvent.emit(this.productForm);
+    this.limpiarFormulario();
+  }
 
+  get validForm() {
+    return this.productForm.invalid;
+  }
   private crearForma() {
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(120)]],
@@ -37,6 +49,11 @@ export class FormProductComponent implements OnInit {
       price: [0, [Validators.required, Validators.min(1)]],
       termCondition: [false, [Validators.requiredTrue]]
     });
+  }
+
+  limpiarFormulario() {
+    this.submited = false;
+    this.productForm.reset();
   }
 
   get name() {
@@ -120,8 +137,5 @@ export class FormProductComponent implements OnInit {
       errorName: "required",
       errorValue: "Debes agregar los terminos y condiciones"
     }
-
-
   ];
-
 }
