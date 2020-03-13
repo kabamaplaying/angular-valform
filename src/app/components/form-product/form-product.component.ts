@@ -21,10 +21,6 @@ export class FormProductComponent implements OnInit, OnChanges {
   submited: boolean = false;
   @Input() editar: boolean = false;
   constructor(private fb: FormBuilder, private validatorFormError: GenericFormValidator) {
-    if (this.productoFormulario !== null && this.productoFormulario !== undefined) {
-      this.crearForma();
-      this.productForm.patchValue(this.productoFormulario);
-    }
   }
 
   ngOnChanges() {
