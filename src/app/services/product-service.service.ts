@@ -55,12 +55,8 @@ export class ProductServiceService {
   }
 
   eliminarProducto(idProducto: number) {
-    this.productList.value
-      .forEach((product: Product, index: number) => {
-        if (product.id === idProducto) {
-          this.productList.value.splice(index, 1);
-        }
-      });
+    const index = this.productList.value.findIndex((value, index) => value.id === idProducto);
+    this.productList.value.splice(index, 1);
     this.productList.next([...this.productList.value])
   }
 

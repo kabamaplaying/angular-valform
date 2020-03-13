@@ -48,6 +48,7 @@ export class FormProductComponent implements OnInit, OnChanges {
     let productoFormulario = { id: -1, ...this.productForm.value };
     this.productEvent.emit(productoFormulario);
     this.limpiarFormulario();
+    this.productForm.reset();
   }
 
     editarProducto() {

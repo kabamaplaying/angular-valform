@@ -41,7 +41,8 @@ export class AppComponent implements OnInit {
   ngOnInit() { }
   agregarProducto(producto: Producto) {
     this.editar = false;
-    this.service.agregarProducto(producto);
+    const newAddObject = Object.assign({}, producto);
+    this.service.agregarProducto(newAddObject);
   }
 
   eliminarProducto(id: number) {
@@ -69,7 +70,7 @@ export class AppComponent implements OnInit {
     this.dialogoService.respuestaUsuario$.subscribe(confirmacionDialogo => {
       if (confirmacionDialogo && confirmacionDialogo.confirmacion) {
         this.service.actualizarProducto(confirmacionDialogo.data);
-        this.productoFormulario = null;
+        this.productoFormulario = {};
         this.dialogoService.limpiarRespuestaUsuario();
       }
     });
