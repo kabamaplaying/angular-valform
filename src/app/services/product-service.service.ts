@@ -50,7 +50,6 @@ export class ProductServiceService {
         mayor = e.id
       }
     });
-    console.log(mayor)
     producto.id = mayor + 1;
     this.productList.next([...this.productList.value, producto]);
   }
@@ -62,22 +61,17 @@ export class ProductServiceService {
           this.productList.value.splice(index, 1);
         }
       });
-
-
     this.productList.next([...this.productList.value])
   }
 
   actualizarProducto(proctuctUpdate: Product) {
-    console.log(`${proctuctUpdate.id} Mis nuevos datos`)
     this.productList.value.map((value, i) => {
-       if(value.id === proctuctUpdate.id) {
-          console.log(`${proctuctUpdate} Mis nuevos datos ecnontrados`)
-         this.productList.value[i] = proctuctUpdate;
-         return;
-       }
+      if (value.id === proctuctUpdate.id) {
+        this.productList.value[i] = proctuctUpdate;
+        return;
+      }
     });
 
-    console.log( this.productList.value, 'Valor lista')
     this.productList.next([...this.productList.value]);
   }
 }

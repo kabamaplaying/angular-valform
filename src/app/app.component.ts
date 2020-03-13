@@ -51,8 +51,8 @@ export class AppComponent implements OnInit {
   actualizarProducto(producto: Producto) {
     this.editar = false;
     const newEditObject = Object.assign({}, producto);
-    producto = {};
     this.service.actualizarProducto(newEditObject);
+    this.productoFormulario = null;
   }
   datosActualizarProducto(data: Producto) {
     this.productoFormulario = data;

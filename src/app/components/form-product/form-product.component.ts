@@ -47,7 +47,7 @@ export class FormProductComponent implements OnInit, OnChanges {
     if (this.productForm.invalid) {
       return;
     }
-    let productoFormulario = { ...this.productForm.value };
+    let productoFormulario = { id: -1, ...this.productForm.value };
     this.productEvent.emit(productoFormulario);
     this.limpiarFormulario();
   }
@@ -64,7 +64,6 @@ export class FormProductComponent implements OnInit, OnChanges {
 
   enviarAccion() {
     if (this.editar) {
-      console.log('vamos a editar')
       this.editarProducto();
     } else {
       this.agregarProducto();
@@ -88,7 +87,7 @@ export class FormProductComponent implements OnInit, OnChanges {
     this.submited = false;
     this.editar = false;
     this.productForm.reset();
-    this.productForm.setValue({});
+    this.productForm.patchValue({});
   }
 
   get name() {
@@ -109,10 +108,8 @@ export class FormProductComponent implements OnInit, OnChanges {
 
   getErrorControl(controlName) {
     const jsonErrors: any = this.productForm.get(controlName).errors;
-    console.log(jsonErrors, 'controlErrors')
     if (jsonErrors !== null) {
       const tipoErrorActual = Object.keys(jsonErrors).map(key => key === null ? '' : key).join('');
-      console.log(tipoErrorActual, 'ssss')
       return this.mensajeError.map((error, index, self) => {
         if (error.controlName === controlName && error.errorName === tipoErrorActual) {
           return error.errorValue;
