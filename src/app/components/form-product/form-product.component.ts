@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, OnChanges } from '@angular/core';
 import { Product } from '../../models/Producto';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray, ValidationErrors } from '@angular/forms';
 import { GenericFormValidator } from '../../validatorsForm/GenericValidator';
@@ -12,20 +12,34 @@ import { ValidatorsCustom } from '../../validatorsForm/validatorscustom';
   templateUrl: './form-product.component.html',
   styleUrls: ['./form-product.component.css']
 })
-export class FormProductComponent implements OnInit {
+export class FormProductComponent implements OnInit, OnChanges {
   @Input() productoFormulario: Product;
-  @Input() productEvent = new EventEmitter();
+  @Output() productEvent = new EventEmitter();
   productForm: FormGroup;
   private errors: AllValidationErrors[];
   submited: boolean = false;
 
-  constructor(private fb: FormBuilder, private validatorFormError: GenericFormValidator, ) { }
+  constructor(private fb: FormBuilder, private validatorFormError: GenericFormValidator) {
+    if (this.productoFormulario !== null && this.productoFormulario !== undefined) {
+      this.crearForma();
+      this.productForm.patchValue(this.productoFormulario);
+    }
+  }
+
+  ngOnChanges() {
+    console.log('Aca vamos', this.productoFormulario)
+    if (this.productoFormulario !== null && this.productoFormulario !== undefined) {
+      console.log('Aca vamos')
+      this.productForm.patchValue(this.productoFormulario);
+    }
+  }
 
   ngOnInit() {
     this.crearForma();
     this.productForm.valueChanges.subscribe(e => {
       this.errors = this.validatorFormError.calculateErrors(this.productForm);
     });
+
   }
 
   agregarProducto() {
@@ -33,8 +47,8 @@ export class FormProductComponent implements OnInit {
     if (this.productForm.invalid) {
       return;
     }
-    this.productForm = { ...this.productForm.value };
-    this.productEvent.emit(this.productForm);
+    let productoFormulario = { ...this.productForm.value };
+    this.productEvent.emit(productoFormulario);
     this.limpiarFormulario();
   }
 

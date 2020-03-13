@@ -46,11 +46,10 @@ export class ProductServiceService {
   agregarProducto(producto: Product) {
     let mayor = 1;
     const pId = this.productList.value.forEach((e: Product, index: number) => {
-        if(e.id > mayor) {
-          mayor = e.id
-        }
-       
-      });
+      if (e.id > mayor) {
+        mayor = e.id
+      }
+    });
     console.log(mayor)
     producto.id = mayor + 1;
     this.productList.next([...this.productList.value, producto]);
@@ -64,11 +63,16 @@ export class ProductServiceService {
         }
       });
 
- 
+
     this.productList.next([...this.productList.value])
   }
 
   actualizarProducto(idProducto: number, proctuctUpdate: Product) {
-
+    this.productList.value.map((value, i) => {
+       if(value.id === idProducto) {
+         this.productList.value[i] = proctuctUpdate;
+       }
+    });
+    this.productList.next([...this.productList.value]);
   }
 }

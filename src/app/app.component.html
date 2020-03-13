@@ -2,51 +2,13 @@
 	<div class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
 		<div class="column">
 			<div class="box">
-			<!-- Aca va mi formulario-->
       <app-form-product [productoFormulario]="productoFormulario" (productEvent)="agregarProducto($event)"></app-form-product>
 			</div>
 		</div>
 		<div class="column">
-			<table class="table is-fullwidt is-striped">
-				<caption>Mis productos</caption>
-				<thead class="thead">
-					<tr>
-						<th>#</th>
-						<th>Nombre</th>
-						<th>Descripción</th>
-						<th>Año</th>
-						<th>Precio</th>
-					</tr>
-				</thead>
-				<tbody class="tbody">
-					<tr *ngFor="let product of lista | async">
-						<td data-label="Account">{{product.id}}</td>
-						<td data-label="Account">{{product.name}} </td>
-						<td data-label="Due Date">{{product.description}}</td>
-						<td data-label="Amount">{{product.year}}</td>
-						<td data-label="Period">{{product.price | currency}}</td>
-						<td>
-							<p class="buttons">
-								<a class="button is-small" (click)="abrirDialogo(product.id)">
-									<span class="icon is-small is-outline">
-                   <i class="material-icons">
-edit
-</i>
-                </span>
-								</a>
-
-								<a class="button is-small " (click)="abrirDialogo(product.id)">
-									<span class="icon  is-small">
-                    <i class="material-icons">delete</i>
-									</span>
-								</a>
-							</p>
-						</td>
-					</tr>
-
-				</tbody>
-			</table>
+		<app-lista-producto [listaProductos]="lista" (listaProductoEvento)="eliminarProducto($event)"
+    (listaAcrualizarProductoEvento)="actualizarProducto($event)"
+    ></app-lista-producto>
 		</div>
-
 	</div>
 </div>

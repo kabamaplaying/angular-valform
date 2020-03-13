@@ -17,14 +17,11 @@ import { Producto } from './models/Producto';
 })
 export class AppComponent implements OnInit {
   lista: Observable<Product[]>;
-  productForm: FormGroup;
   productoFormulario: Producto;
   private errors: AllValidationErrors[];
   submited: boolean = false;
   constructor(
     private service: ProductServiceService,
-
-
     private dialogoService: DialogService) {
     this.lista = this.service.listaProductos();
   }
@@ -38,6 +35,9 @@ export class AppComponent implements OnInit {
 
   eliminarProducto(id: number) {
     this.service.eliminarProducto(id);
+  }
+  actualizarProducto(data: Producto) {
+    this.productoFormulario = data;
   }
   abrirDialogo(data: Product) {
     const dataDialog = { data, mensaje: '¿Estás seguro de eliminar el producto seleccionado?', titulo: 'Eliminar producto' };
