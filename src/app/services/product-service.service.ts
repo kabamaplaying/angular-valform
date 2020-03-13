@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
-import { Product } from './Producto';
+import { Product } from './models/Producto';
 @Injectable({ providedIn: "root" })
 export class ProductServiceService {
 

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray, ValidationErrors } from '@angular/forms';
 import { Observable, of } from 'rxjs';
-import { ProductServiceService } from './product-service.service';
-import { Product } from './Producto';
+import { ProductServiceService } from './services/product-service.service';
+import { Product } from './models/Producto';
 import { GenericFormValidator } from './validatorsForm/GenericValidator';
 import { AllValidationErrors, AllValidationErrorsMin } from './validatorsForm/allvalidationerrors';
 import { tap, map, filter } from 'rxjs/operators';
 import { ValidatorsCustom } from './validatorsForm/validatorscustom';
 import { DialogService } from './services/dialog-service';
-import { DialogData } from '../models/dialog-data';
+import { DialogData } from './models/dialog-data';
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
