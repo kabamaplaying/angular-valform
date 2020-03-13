@@ -31,6 +31,8 @@ export class FormProductComponent implements OnInit, OnChanges {
     
     if (this.productoFormulario !== null && this.productoFormulario !== undefined) {
      this.productForm.patchValue(this.productoFormulario);
+    } else{
+       this.limpiarFormulario()
     }
   }
 
@@ -86,7 +88,6 @@ export class FormProductComponent implements OnInit, OnChanges {
   limpiarFormulario() {
     this.submited = false;
     this.editar = false;
-    this.productForm.reset();
     this.productForm.patchValue({});
   }
 
