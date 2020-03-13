@@ -15,15 +15,15 @@
 			<td data-label="Account">{{product.name}} </td>
 			<td data-label="Due Date">{{product.description}}</td>
 			<td data-label="Amount">{{product.year}}</td>
-			<td data-label="Period">{{product.price | currency}}</td>
+			<td data-label="Period"><h6 class="title is-6">{{product.price | currency}}</h6></td>
 			<td>
 				<p class="buttons">
-					<a class="button is-small" (click)="actualizarProducto(product)">
+					<a class="button is-small is-primary" (click)="actualizarProducto(product)">
 						<span class="icon is-small is-outline">
                    <i class="material-icons">edit</i>
             </span>
 					</a>
-					<a class="button is-small " (click)="abrirDialogo(product.id)">
+					<a class="button is-small is-danger" (click)="abrirDialogo(product.id)">
 						<span class="icon  is-small">
                     <i class="material-icons">delete</i>
 									</span>

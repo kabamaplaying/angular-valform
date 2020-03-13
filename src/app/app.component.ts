@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
     this.lista = this.service.listaProductos();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
   agregarProducto(producto: Producto) {
     this.editar = false;
     this.service.agregarProducto(producto);
@@ -51,23 +51,25 @@ export class AppComponent implements OnInit {
   actualizarProducto(producto: Producto) {
     this.editar = false;
     const newEditObject = Object.assign({}, producto);
-    this.service.actualizarProducto(newEditObject);
-    this.productoFormulario = null;
+    this.abrirDialogoActualizar(newEditObject)
   }
   datosActualizarProducto(data: Producto) {
     this.productoFormulario = data;
     this.editar = true;
   }
-  abrirDialogo(data: Product) {
+  
+  abrirDialogoActualizar(data: Product) {
     const dataDialog = {
       data,
-      mensaje: "¿Estás seguro de eliminar el producto seleccionado?",
-      titulo: "Eliminar producto"
+      mensaje: "¿Estás seguro de actualizar el producto seleccionado?",
+      titulo: "Actualizar producto",
+      titleBtnconfirmacion: "Actualizar"
     };
     this.dialogoService.abrirDialog(dataDialog);
     this.dialogoService.respuestaUsuario$.subscribe(confirmacionDialogo => {
       if (confirmacionDialogo && confirmacionDialogo.confirmacion) {
-        this.eliminarProducto(confirmacionDialogo.data);
+        this.service.actualizarProducto(confirmacionDialogo.data);
+        this.productoFormulario = null;
         this.dialogoService.limpiarRespuestaUsuario();
       }
     });

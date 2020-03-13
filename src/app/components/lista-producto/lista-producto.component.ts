@@ -24,15 +24,19 @@ export class ListaProductoComponent implements OnInit {
     this.listaAcrualizarProductoEvento.emit(data);
   }
   abrirDialogo(data: Producto) {
-    const dataDialog = { data, mensaje: '¿Estás seguro de eliminar el producto seleccionado?', titulo: 'Eliminar producto' };
+    const dataDialog = {
+      data,
+      mensaje: "¿Estás seguro de eliminar el producto seleccionado?",
+      titulo: "Eliminar producto",
+      titleBtnconfirmacion: "Eliminar"
+    };
     this.dialogoService.abrirDialog(dataDialog);
     this.dialogoService.respuestaUsuario$.subscribe(confirmacionDialogo => {
       if (confirmacionDialogo && confirmacionDialogo.confirmacion) {
         this.eliminarProducto(confirmacionDialogo.data);
         this.dialogoService.limpiarRespuestaUsuario();
       }
-    }
-    )
+    });
   }
 
   abrirDialogoActualizar(data: Producto) {

@@ -3,4 +3,5 @@ export interface DialogData<T> {
   mensaje: string;
   titulo: string;
   confirmacion?: any;
+  titleBtnconfirmacion: string;
 }
