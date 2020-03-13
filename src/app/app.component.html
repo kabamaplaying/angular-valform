@@ -86,12 +86,12 @@
 				</form>
 			</div>
 		</div>
-		<div class="column"> 
+		<div class="column">
 			<table class="table is-fullwidt is-striped">
 				<caption>Mis productos</caption>
 				<thead class="thead">
 					<tr>
-            <th>#</th>
+						<th>#</th>
 						<th>Nombre</th>
 						<th>Descripción</th>
 						<th>Año</th>
@@ -100,17 +100,29 @@
 				</thead>
 				<tbody class="tbody">
 					<tr *ngFor="let product of lista | async">
-            <td data-label="Account">{{product.id}}</td>
-						<td data-label="Account">{{product.name}}  </td>
+						<td data-label="Account">{{product.id}}</td>
+						<td data-label="Account">{{product.name}} </td>
 						<td data-label="Due Date">{{product.description}}</td>
 						<td data-label="Amount">{{product.year}}</td>
 						<td data-label="Period">{{product.price | currency}}</td>
-						<td><a class="button is-danger is-outlined" (click)="abrirDialogo(product.id)">
-								<span>eliminar</span>
-								<span class="icon is-small"><i class="fas fa-times"></i>
+						<td>
+							<p class="buttons">
+								<a class="button is-danger is-outlined" (click)="abrirDialogo(product.id)">
+                  <span>eliminar</span>
+									<span class="icon is-small">
+                   <i class="material-icons">
+edit
+</i>
                 </span>
-							</a>
-              </td>
+								</a>
+
+								<a class="button is-small" (click)="abrirDialogo(product.id)">
+									<span class="icon  is-small">
+                    <i class="fas fa-check"></i>
+									</span>
+								</a>
+							</p>
+						</td>
 					</tr>
 
 				</tbody>
