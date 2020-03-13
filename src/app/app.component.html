@@ -2,12 +2,16 @@
 	<div class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
 		<div class="column">
 			<div class="box">
-      <app-form-product [productoFormulario]="productoFormulario" (productEvent)="agregarProducto($event)"></app-form-product>
+      <app-form-product [productoFormulario]="productoFormulario" 
+                        [editar]="editar"  
+                        (productEvent)="agregarProducto($event)"
+                        (productEventEdit)="actualizarProducto($event)"
+                        ></app-form-product>
 			</div>
 		</div>
 		<div class="column">
 		<app-lista-producto [listaProductos]="lista" (listaProductoEvento)="eliminarProducto($event)"
-    (listaAcrualizarProductoEvento)="actualizarProducto($event)"
+    (listaAcrualizarProductoEvento)="datosActualizarProducto($event)"
     ></app-lista-producto>
 		</div>
 	</div>

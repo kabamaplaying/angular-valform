@@ -15,10 +15,11 @@ import { ValidatorsCustom } from '../../validatorsForm/validatorscustom';
 export class FormProductComponent implements OnInit, OnChanges {
   @Input() productoFormulario: Product;
   @Output() productEvent = new EventEmitter();
+  @Output() productEventEdit = new EventEmitter();
   productForm: FormGroup;
   private errors: AllValidationErrors[];
   submited: boolean = false;
-
+  @Input() editar: boolean = false;
   constructor(private fb: FormBuilder, private validatorFormError: GenericFormValidator) {
     if (this.productoFormulario !== null && this.productoFormulario !== undefined) {
       this.crearForma();
@@ -27,10 +28,9 @@ export class FormProductComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    console.log('Aca vamos', this.productoFormulario)
+    
     if (this.productoFormulario !== null && this.productoFormulario !== undefined) {
-      console.log('Aca vamos')
-      this.productForm.patchValue(this.productoFormulario);
+     this.productForm.patchValue(this.productoFormulario);
     }
   }
 
@@ -52,6 +52,25 @@ export class FormProductComponent implements OnInit, OnChanges {
     this.limpiarFormulario();
   }
 
+    editarProducto() {
+    this.submited = true;
+    if (this.productForm.invalid) {
+      return;
+    }
+    let productoFormulario = { ...this.productForm.value, id: this.productoFormulario.id };
+    this.productEventEdit.emit(productoFormulario);
+    this.limpiarFormulario();
+  }
+
+  enviarAccion() {
+    if (this.editar) {
+      console.log('vamos a editar')
+      this.editarProducto();
+    } else {
+      this.agregarProducto();
+    }
+  }
+
   get validForm() {
     return this.productForm.invalid;
   }
@@ -67,7 +86,9 @@ export class FormProductComponent implements OnInit, OnChanges {
 
   limpiarFormulario() {
     this.submited = false;
+    this.editar = false;
     this.productForm.reset();
+    this.productForm.setValue({});
   }
 
   get name() {

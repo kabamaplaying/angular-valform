@@ -67,12 +67,17 @@ export class ProductServiceService {
     this.productList.next([...this.productList.value])
   }
 
-  actualizarProducto(idProducto: number, proctuctUpdate: Product) {
+  actualizarProducto(proctuctUpdate: Product) {
+    console.log(`${proctuctUpdate.id} Mis nuevos datos`)
     this.productList.value.map((value, i) => {
-       if(value.id === idProducto) {
+       if(value.id === proctuctUpdate.id) {
+          console.log(`${proctuctUpdate} Mis nuevos datos ecnontrados`)
          this.productList.value[i] = proctuctUpdate;
+         return;
        }
     });
+
+    console.log( this.productList.value, 'Valor lista')
     this.productList.next([...this.productList.value]);
   }
 }
