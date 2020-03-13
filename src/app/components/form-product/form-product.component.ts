@@ -24,7 +24,7 @@ export class FormProductComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    
+    this.crearForma();
     if (this.productoFormulario !== null && this.productoFormulario !== undefined) {
      this.productForm.patchValue(this.productoFormulario);
     } else{
