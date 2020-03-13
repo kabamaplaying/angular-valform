@@ -1,6 +1,11 @@
+<article class="message is-danger">
+  <div class="message-body">
+    Los campos con <span class="has-text-danger">(*)</span> son obligatorios, hasta que no se validen no se habilitara el botón de guardar.
+  </div>
+</article>
 <form [formGroup]="productForm" (ngSubmit)="enviarAccion()">
 	<div class="field">
-		<label class="label">Nombre</label>
+		<label class="label control">Nombre <span class="has-text-danger">(*)</span></label>
 		<div class="control">
 			<input class="input" type="text" placeholder="Ingresa el nombre del producto" formControlName="name"
             [ngClass]="{'is-danger': (name.errors && submited), 'is-primary': !name.errors}"
@@ -13,7 +18,7 @@
 	</div>
 
 	<div class="field">
-		<label class="label">Descripción</label>
+		<label class="label">Descripción <span class="has-text-danger">(*)</span></label>
 		<div class="control has-icons-left has-icons-right">
 			<textarea class="textarea" placeholder="Ingresa una descripcion del producto" formControlName="description"
           [ngClass]="{'is-danger': (description.errors && submited), 'is-primary': !description.errors}"
@@ -29,7 +34,7 @@
 	</div>
 
 	<div class="field">
-		<label class="label">Año</label>
+		<label class="label">Año <span class="has-text-danger">(*)</span></label>
 		<div class="control has-icons-left has-icons-right">
 			<input class="input" [ngClass]="{'is-danger': (year.errors && submited), 'is-primary': !year.errors}" type="number" placeholder="Ingresa el año de creacion" value="Ingresa el año de creacion del producto" formControlName="year">
 			<span class="icon is-small is-left">
@@ -45,7 +50,7 @@
 	</div>
 
 	<div class="field">
-		<label class="label">Precio</label>
+		<label class="label">Precio <span class="has-text-danger">(*)</span></label>
 		<div class="control">
 			<input class="input" [ngClass]="{'is-danger': submited && price.errors, 'is-primary' : !price.errors}" type="number" placeholder="Precio del producto"  formControlName="price">
 				</div>
